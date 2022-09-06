@@ -8,7 +8,7 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 contract FarkasPoH is ERC721 {
     using Counters for Counters.Counter;
 
-    event Donation(address indexed human, uint256 amount);
+    event Donation(address indexed human, uint256 tokenId, uint256 amount);
 
     Counters.Counter private _tokenIds;
     IProofOfHumanity immutable proofOfHumanity;
@@ -40,7 +40,9 @@ contract FarkasPoH is ERC721 {
         _rarity[tokenId] = _randomRarity();
         _safeMint(msg.sender, tokenId);
 
-        if (msg.value > 0) emit Donation(msg.sender, msg.value);
+        _alreadyMinted[msg.sender] = true;
+
+        if (msg.value > 0) emit Donation(msg.sender, tokenId, msg.value);
     }
 
     function _randomRarity() private view returns (bool) {
@@ -53,8 +55,10 @@ contract FarkasPoH is ERC721 {
                 )
             )
         ) % 2;
+
         if (n == 0) return false;
         if (n == 1) return true;
+
         revert("No deberia llegar aca");
     }
 
