@@ -5,7 +5,9 @@ import "./IProofOfHumanity.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-contract FarkasPoH is ERC721 {
+import "./IFarkasPoH.sol";
+
+contract FarkasPoH is ERC721, IFarkasPoH {
     using Counters for Counters.Counter;
 
     event Donation(address indexed human, uint256 tokenId, uint256 amount);
@@ -41,6 +43,10 @@ contract FarkasPoH is ERC721 {
         front = payable(_front);
     }
 
+    function isRegistered(address human) public view returns (bool) {
+        return proofOfHumanity.isRegistered(human);
+    }
+
     function totalSupply() public view returns (uint256) {
         return _tokenIds.current();
     }
@@ -50,7 +56,7 @@ contract FarkasPoH is ERC721 {
     }
 
     function mint() public payable {
-        require(proofOfHumanity.isRegistered(msg.sender), "Not human");
+        require(isRegistered(msg.sender), "Not human");
         require(!alreadyMinted(msg.sender), "Human already minted NFT");
 
         _tokenIds.increment();

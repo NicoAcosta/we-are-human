@@ -4,7 +4,7 @@ pragma solidity ^0.8.9;
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 
 interface IFarkasPoH is IERC721 {
-    event Donation(address indexed human, uint256 tokenId, uint256 amount);
+    // event Donation(address indexed human, uint256 tokenId, uint256 amount);
 
     // returns if address is registered in Proof Of Humanity
     function isRegistered(address human) external view returns (bool);
