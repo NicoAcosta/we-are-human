@@ -106,6 +106,8 @@ contract FarkasPoH is ERC721, IFarkasPoH {
     function withdrawETH() external {
         uint256 balance = address(this).balance;
 
+        require(balance > 0, "No balance to withdraw");
+
         farkas.transfer((balance * 75) / 1000); // 7.5 %
         v4len.transfer((balance * 75) / 1000); // 7.5 %
         nico.transfer((balance * 10) / 100); // 10 %
