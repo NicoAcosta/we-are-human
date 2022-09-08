@@ -1,0 +1,6 @@
+[
+  "constructor(address[])",
+  "event Registered(address)",
+  "function isRegistered(address) view returns (bool)",
+  "function register(address)"
+]
