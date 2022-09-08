@@ -1,0 +1,6 @@
+[
+  "event Donation(address indexed,uint256,uint256)",
+  "function alreadyMinted(address) view returns (bool)",
+  "function isRegistered(address) view returns (bool)",
+  "function mint() payable"
+]
