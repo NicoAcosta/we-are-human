@@ -5,9 +5,9 @@ import "./IProofOfHumanity.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-import "./IFarkasPoH.sol";
+import "./IWeAreHuman.sol";
 
-contract FarkasPoH is ERC721, IFarkasPoH {
+contract WeAreHuman is ERC721, IWeAreHuman {
     using Counters for Counters.Counter;
 
     event Donation(address indexed human, uint256 tokenId, uint256 amount);
@@ -33,7 +33,7 @@ contract FarkasPoH is ERC721, IFarkasPoH {
         address _v4len,
         address _nico,
         address _front
-    ) ERC721("Farkas PoH", "FPoH") {
+    ) ERC721("We Are Human", "FPoH") {
         proofOfHumanity = IProofOfHumanity(_proofOfHumanity);
 
         ubiBurner = payable(_ubiBurner);

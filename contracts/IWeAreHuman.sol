@@ -3,16 +3,16 @@ pragma solidity ^0.8.9;
 
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 
-interface IFarkasPoH is IERC721 {
+interface IWeAreHuman is IERC721 {
     // event Donation(address indexed human, uint256 tokenId, uint256 amount);
 
     // returns if address is registered in Proof Of Humanity
     function isRegistered(address human) external view returns (bool);
 
-    // returns if address has already minted Farkas PoH NFT
+    // returns if address has already minted We Are Human NFT
     function alreadyMinted(address human) external view returns (bool);
 
-    // mint FarkasPoH NFT, optional ETH donation through msg.value
+    // mint WeAreHuman NFT, optional ETH donation through msg.value
     function mint() external payable;
 
     /**

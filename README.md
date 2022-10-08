@@ -1,1 +1,1 @@
-# Farkas PoH Collection
+# We Are Human Collection
