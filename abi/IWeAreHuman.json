@@ -8,7 +8,7 @@
   "function getApproved(uint256) view returns (address)",
   "function isApprovedForAll(address,address) view returns (bool)",
   "function isRegistered(address) view returns (bool)",
-  "function mint() payable",
+  "function mint(uint8) payable",
   "function ownerOf(uint256) view returns (address)",
   "function safeTransferFrom(address,address,uint256)",
   "function safeTransferFrom(address,address,uint256,bytes)",

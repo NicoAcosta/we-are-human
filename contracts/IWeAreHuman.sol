@@ -2,6 +2,7 @@
 pragma solidity ^0.8.9;
 
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
+import "./WeAreHumanLevels.sol";
 
 interface IWeAreHuman is IERC721 {
     // event Donation(address indexed human, uint256 tokenId, uint256 amount);
@@ -13,7 +14,7 @@ interface IWeAreHuman is IERC721 {
     function alreadyMinted(address human) external view returns (bool);
 
     // mint WeAreHuman NFT, optional ETH donation through msg.value
-    function mint() external payable;
+    function mint(Level _level) external payable;
 
     /**
         function will
