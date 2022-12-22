@@ -17,6 +17,7 @@ contract WeAreHuman is ERC721, IWeAreHuman {
     using Strings for uint256;
 
     event Donation(address indexed human, uint256 tokenId, uint256 amount);
+
     event Minted(
         address indexed human,
         uint256 tokenId,
@@ -78,7 +79,7 @@ contract WeAreHuman is ERC721, IWeAreHuman {
         _tokenIds.increment();
         uint256 tokenId = _tokenIds.current();
 
-        bool _rarity = _randomRarity();
+        bool _rarity = _randomishRarity();
 
         _rarities[tokenId] = _rarity;
         _levels[tokenId] = _level;
@@ -100,7 +101,7 @@ contract WeAreHuman is ERC721, IWeAreHuman {
         revert LevelOutOfBounds(_level);
     }
 
-    function _randomRarity() private view returns (bool) {
+    function _randomishRarity() private view returns (bool) {
         uint256 n = uint256(
             keccak256(
                 abi.encodePacked(
@@ -114,6 +115,7 @@ contract WeAreHuman is ERC721, IWeAreHuman {
         if (n == 0) return false;
         if (n == 1) return true;
 
+        // remove post testing
         revert("No deberia llegar aca");
     }
 
@@ -124,8 +126,7 @@ contract WeAreHuman is ERC721, IWeAreHuman {
     function _rarityToString(
         bool _rarity
     ) private pure returns (string memory) {
-        if (_rarity == false) return "where-we-come-from";
-        return "where-we-re-going";
+        return _rarity ? "where-we-come-from" : "where-we-re-going";
     }
 
     function _baseURI() internal pure override returns (string memory) {
