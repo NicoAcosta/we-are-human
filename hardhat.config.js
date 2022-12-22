@@ -3,6 +3,7 @@ require('hardhat-abi-exporter')
 require('hardhat-gas-reporter')
 require('solidity-coverage')
 require('hardhat-contract-sizer')
+require('dotenv').config()
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
