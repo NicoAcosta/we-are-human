@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.9;
 
-import "./IProofOfHumanity.sol";
+import "./interfaces/IProofOfHumanity.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 
-import "./IWeAreHuman.sol";
-import "./WeAreHumanLevels.sol";
+import "./interfaces/IWeAreHuman.sol";
+import "./Levels.sol";
 
 error LevelOutOfBounds(Level level);
 error InvalidETHReceived(uint256 expected, uint256 received);
@@ -124,11 +124,9 @@ contract WeAreHuman is ERC721, IWeAreHuman {
         return "contractipfs";
     }
 
-    function _rarityToString(bool _rarity)
-        private
-        pure
-        returns (string memory)
-    {
+    function _rarityToString(
+        bool _rarity
+    ) private pure returns (string memory) {
         if (_rarity == false) return "where-we-come-from";
         return "where-we-re-going";
     }
@@ -137,12 +135,9 @@ contract WeAreHuman is ERC721, IWeAreHuman {
         return "ipfs/";
     }
 
-    function tokenURI(uint256 tokenId)
-        public
-        view
-        override
-        returns (string memory)
-    {
+    function tokenURI(
+        uint256 tokenId
+    ) public view override returns (string memory) {
         require(_exists(tokenId), "Token id does not exist");
 
         string memory _rarity = _rarityToString(_rarities[tokenId]);

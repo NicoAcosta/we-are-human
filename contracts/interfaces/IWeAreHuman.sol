@@ -2,7 +2,7 @@
 pragma solidity ^0.8.9;
 
 import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
-import "./WeAreHumanLevels.sol";
+import "../Levels.sol";
 
 interface IWeAreHuman is IERC721 {
     // event Donation(address indexed human, uint256 tokenId, uint256 amount);

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
-import "./IProofOfHumanity.sol";
+import "../interfaces/IProofOfHumanity.sol";
 
 contract DummyPoH is IProofOfHumanity {
     event Registered(address addr);
