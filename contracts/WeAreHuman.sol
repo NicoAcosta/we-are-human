@@ -28,7 +28,6 @@ contract WeAreHuman is ERC721, IWeAreHuman {
     IProofOfHumanity immutable proofOfHumanity;
 
     address payable public ubiBurner;
-    address payable public farkas;
     address payable public immutable v4len;
     address payable public immutable nico;
     address payable public immutable front;
@@ -44,7 +43,6 @@ contract WeAreHuman is ERC721, IWeAreHuman {
     constructor(
         address _proofOfHumanity,
         address _ubiBurner,
-        address _farkas,
         address _v4len,
         address _nico,
         address _front
@@ -52,7 +50,6 @@ contract WeAreHuman is ERC721, IWeAreHuman {
         proofOfHumanity = IProofOfHumanity(_proofOfHumanity);
 
         ubiBurner = payable(_ubiBurner);
-        farkas = payable(_farkas);
         v4len = payable(_v4len);
         nico = payable(_nico);
         front = payable(_front);
@@ -152,7 +149,6 @@ contract WeAreHuman is ERC721, IWeAreHuman {
 
         require(balance > 0, "No balance to withdraw");
 
-        farkas.transfer((balance * 75) / 1000); // 7.5 %
         v4len.transfer((balance * 75) / 1000); // 7.5 %
         nico.transfer((balance * 10) / 100); // 10 %
         front.transfer((balance * 10) / 100); // 10 %
