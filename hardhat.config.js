@@ -1,5 +1,8 @@
 require('@nomicfoundation/hardhat-toolbox')
 require('hardhat-abi-exporter')
+require('hardhat-gas-reporter')
+require('solidity-coverage')
+require('hardhat-contract-sizer')
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
@@ -15,6 +18,17 @@ module.exports = {
 		runOnCompile: true,
 		flat: true,
 		spacing: 2,
-		pretty: true
+		pretty: true,
+		only: ['IProofOfHumanity', 'IWeAreHuman', 'DummyPoH', 'WeAreHuman']
+	},
+	gasReporter: {
+		enabled: true,
+		currency: 'USD'
+	},
+	contractSizer: {
+		alphaSort: true,
+		disambiguatePaths: false,
+		runOnCompile: true,
+		strict: true
 	}
 }
