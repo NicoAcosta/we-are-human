@@ -26,7 +26,7 @@ contract WeAreHuman is ERC721, IWeAreHuman {
     );
 
     Counters.Counter private _tokenIds;
-    IProofOfHumanity immutable proofOfHumanity;
+    IProofOfHumanity public proofOfHumanity;
 
     address payable public ubiBurner;
     address payable public immutable v4len;
