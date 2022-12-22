@@ -120,17 +120,18 @@ contract WeAreHuman is ERC721, IWeAreHuman {
     }
 
     function contractURI() external pure returns (string memory) {
-        return "contractipfs";
+        return string(abi.encodePacked(_baseURI(), "collection.json"));
     }
 
     function _rarityToString(
         bool _rarity
     ) private pure returns (string memory) {
-        return _rarity ? "where-we-come-from" : "where-we-re-going";
+        return _rarity ? "earth" : "moon";
     }
 
     function _baseURI() internal pure override returns (string memory) {
-        return "ipfs/";
+        return
+            "https://ipfs.io/ipfs/bafybeidiy45jzm4dcx3wd2n4iqyfp6kpqzgqql3quoqf5ccu7lqxro2lpi/";
     }
 
     function tokenURI(
@@ -141,8 +142,9 @@ contract WeAreHuman is ERC721, IWeAreHuman {
         string memory _rarity = _rarityToString(_rarities[tokenId]);
         string memory _level = uint256(_levels[tokenId]).toString();
 
-        return
-            string(abi.encodePacked(_baseURI(), _rarity, "/", _level, ".json"));
+        // return
+        //     string(abi.encodePacked(_baseURI(), _rarity, "/", _level, ".json"));
+        return string(abi.encodePacked(_baseURI(), _rarity, ".json"));
     }
 
     function withdrawETH() external {
