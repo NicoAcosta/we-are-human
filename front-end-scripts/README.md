@@ -17,6 +17,7 @@
 	type="application/javascript"
 ></script>
 
+<script src="https://raw.githubusercontent.com/NicoAcosta/we-are-human/main/front-end-scripts/aux.js"></script>
 <script src="https://raw.githubusercontent.com/NicoAcosta/we-are-human/main/front-end-scripts/data.js"></script>
 <script src="https://raw.githubusercontent.com/NicoAcosta/we-are-human/main/front-end-scripts/config.js"></script>
 <script src="https://raw.githubusercontent.com/NicoAcosta/we-are-human/main/front-end-scripts/init.js"></script>
