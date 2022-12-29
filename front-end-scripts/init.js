@@ -23,7 +23,7 @@ const connectWallet = async () => {
 	// request addresses
 	await provider.send('eth_requestAccounts', [])
 
-	signer = provider.getSigner()
+	signer = await provider.getSigner()
 
 	contractWithSigner = await contract.connect(signer)
 }

@@ -20,7 +20,7 @@ const mint = async (level) => {
 		reload()
 	}
 
-	_mint(level)
+	await _mint(level)
 }
 
 const _mint = async (level) => {
