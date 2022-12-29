@@ -33,6 +33,8 @@ contract WeAreHuman is ERC721, IWeAreHuman {
     address payable public immutable nico;
     address payable public immutable front;
 
+    uint256 public totalRaised;
+
     mapping(address => bool) private _alreadyMinted;
 
     // tokenId => binary rarity
@@ -107,7 +109,10 @@ contract WeAreHuman is ERC721, IWeAreHuman {
 
         emit Minted(msg.sender, tokenId, _rarity, _level);
 
-        if (msg.value > 0) emit Donation(msg.sender, tokenId, msg.value);
+        if (msg.value > 0) {
+            totalRaised += msg.value;
+            emit Donation(msg.sender, tokenId, msg.value);
+        }
     }
 
     function mintingDonation(Level _level) public pure returns (uint256) {
@@ -167,9 +172,9 @@ contract WeAreHuman is ERC721, IWeAreHuman {
         require(balance > 0, "No balance to withdraw");
 
         v4len.transfer((balance * 75) / 1000); // 7.5 %
-        nico.transfer((balance * 10) / 100); // 10 %
-        front.transfer((balance * 10) / 100); // 10 %
+        nico.transfer(balance / 10); // 10 %
+        front.transfer(balance / 10); // 10 %
 
-        ubiBurner.transfer(address(this).balance); // 65 %
+        ubiBurner.transfer(address(this).balance); // 72.5 %
     }
 }

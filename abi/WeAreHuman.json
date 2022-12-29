@@ -29,6 +29,7 @@
   "function supportsInterface(bytes4) view returns (bool)",
   "function symbol() view returns (string)",
   "function tokenURI(uint256) view returns (string)",
+  "function totalRaised() view returns (uint256)",
   "function totalSupply() view returns (uint256)",
   "function transferFrom(address,address,uint256)",
   "function ubiBurner() view returns (address)",

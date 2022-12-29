@@ -1,6 +1,14 @@
 const {expect} = require('chai')
+const {providers, BigNumber} = require('ethers')
+const {ethers} = require('hardhat')
 
 const eth = ethers.utils.parseEther
+
+const balance = async (account) => {
+	return await ethers.provider.getBalance(account.address)
+}
+
+const initialBalance = eth('10000')
 
 describe('WeAreHuman', () => {
 	let proofOfHumanity,
@@ -22,6 +30,7 @@ describe('WeAreHuman', () => {
 		registered10,
 		addr1,
 		humans
+	// initialBalance
 
 	const deploy = async () => {
 		;[
@@ -100,6 +109,12 @@ describe('WeAreHuman', () => {
 		await tx.wait()
 	}
 
+	const mintMultiple = async (amount, level) => {
+		for (let i = 0; i < amount; i++) {
+			await mint(humans[i], level)
+		}
+	}
+
 	describe('Minting', async () => {
 		describe('Reverts', async () => {
 			it('Should revert if minter is not PoH registered', async () => {
@@ -148,18 +163,54 @@ describe('WeAreHuman', () => {
 			})
 
 			it('Should set different randomish rarities', async () => {
+				await mintMultiple(10, 1)
+
 				const rarities = {earth: 0, moon: 0}
 
 				for (let i = 0; i < humans.length; i++) {
-					await mint(humans[i], 1)
-
-					const rarity = await weAreHuman.rarityOf(i + 1)
-					rarities[rarity]++
+					const _rarity = await weAreHuman.rarityOf(i + 1)
+					rarities[_rarity]++
 				}
 
 				expect(rarities.earth).to.be.greaterThanOrEqual(1)
 				expect(rarities.moon).to.be.greaterThanOrEqual(1)
 			})
+		})
+	})
+
+	describe('Withdrawal', async () => {
+		let raised
+
+		beforeEach(async () => {
+			await mintMultiple(10, 1)
+
+			raised = await balance(weAreHuman)
+
+			const withdrawal = await weAreHuman.withdrawETH()
+			await withdrawal.wait()
+		})
+
+		it('Should withdraw ETH to recipients', async () => {
+			// burner receives 72.5%
+			expect(await balance(burner)).to.equal(
+				initialBalance.add(raised.mul(725).div(1000))
+			)
+			// front receives 10%
+			expect(await balance(front)).to.equal(
+				initialBalance.add(raised.div(10))
+			)
+			// nico receives 10%
+			expect(await balance(nico)).to.equal(
+				initialBalance.add(raised.div(10))
+			)
+			// valen receives 7.5%
+			expect(await balance(valen)).to.equal(
+				initialBalance.add(raised.mul(75).div(1000))
+			)
+		})
+
+		it('Should withdraw ETH', async () => {
+			expect(await balance(weAreHuman)).to.equal(0)
 		})
 	})
 })
