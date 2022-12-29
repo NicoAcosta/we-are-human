@@ -7,7 +7,10 @@ async function main() {
 	console.log('Deployer:', await deployer.getAddress())
 
 	const DummyPoH = await ethers.getContractFactory('DummyPoH')
-	const proofOfHumanity = await DummyPoH.deploy()
+	const proofOfHumanity = await DummyPoH.deploy([
+		process.env.TESTNET_NICO,
+		process.env.TESTNET_VALEN
+	])
 	await proofOfHumanity.deployed()
 
 	console.log('DummyPoH address:', proofOfHumanity.address)
