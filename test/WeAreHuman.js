@@ -1,6 +1,6 @@
 const {expect} = require('chai')
 
-describe('WeAreHuman', async () => {
+describe('WeAreHuman', () => {
 	let proofOfHumanity,
 		weAreHuman,
 		owner,
@@ -43,12 +43,12 @@ describe('WeAreHuman', async () => {
 		)
 	}
 
-	this.beforeEach(async () => {
+	beforeEach(async () => {
 		await deploy()
 	})
 
 	describe('Deployment', async () => {
-		it('Should set proof of humanity contract address', async () => {
+		it('Should set PoH contract address', async () => {
 			expect(await weAreHuman.proofOfHumanity()).to.equal(
 				proofOfHumanity.address
 			)
