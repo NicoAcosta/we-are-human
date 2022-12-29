@@ -178,6 +178,42 @@ describe('WeAreHuman', () => {
 		})
 	})
 
+	describe('Metadata', async () => {
+		let cids = require('../metadata/cids.json')
+
+		const url = (fileName) => {
+			return `https://ipfs.io/ipfs/${cids.metadata}/${fileName}.json`
+		}
+
+		it('Should return collection metadata URL', async () => {
+			expect(await weAreHuman.contractURI()).to.equal(url('collection'))
+		})
+
+		it('Should return tokens metadata URL', async () => {
+			await mintMultiple(10, 1)
+
+			let i = 1
+
+			if ((await weAreHuman.rarityOf(i)) == 'earth') {
+				expect(await weAreHuman.tokenURI(i)).to.equal(url('earth'))
+
+				do {
+					i++
+				} while ((await weAreHuman.rarityOf(i)) == 'earth')
+
+				expect(await weAreHuman.tokenURI(i)).to.equal(url('moon'))
+			} else {
+				expect(await weAreHuman.tokenURI(i)).to.equal(url('moon'))
+
+				do {
+					i++
+				} while ((await weAreHuman.rarityOf(i)) == 'moon')
+
+				expect(await weAreHuman.tokenURI(i)).to.equal(url('earth'))
+			}
+		})
+	})
+
 	describe('Withdrawal', async () => {
 		let raised
 
@@ -209,7 +245,7 @@ describe('WeAreHuman', () => {
 			)
 		})
 
-		it('Should withdraw ETH', async () => {
+		it('Should withdraw ETH from contract', async () => {
 			expect(await balance(weAreHuman)).to.equal(0)
 		})
 	})
