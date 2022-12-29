@@ -41,6 +41,11 @@ contract WeAreHuman is ERC721, IWeAreHuman {
     // tokenId => Level enum
     mapping(uint256 => Level) private _levels;
 
+    modifier validToken(uint256 tokenId) {
+        require(_exists(tokenId), "Token does not exist");
+        _;
+    }
+
     constructor(
         address _proofOfHumanity,
         address _ubiBurner,
@@ -66,6 +71,18 @@ contract WeAreHuman is ERC721, IWeAreHuman {
 
     function alreadyMinted(address human) external view returns (bool) {
         return _alreadyMinted[human];
+    }
+
+    function rarityOf(
+        uint256 tokenId
+    ) external view validToken(tokenId) returns (string memory) {
+        return _rarityToString(_rarities[tokenId]);
+    }
+
+    function levelOf(
+        uint256 tokenId
+    ) external view validToken(tokenId) returns (Level) {
+        return _levels[tokenId];
     }
 
     function mint(Level _level) external payable {
