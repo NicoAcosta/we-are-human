@@ -131,9 +131,6 @@ contract WeAreHuman is ERC721, IWeAreHuman {
 
         if (n == 0) return false;
         if (n == 1) return true;
-
-        // remove post testing
-        revert("No deberia llegar aca");
     }
 
     function contractURI() external pure returns (string memory) {
