@@ -29,9 +29,9 @@ contract WeAreHuman is ERC721, IWeAreHuman {
     IProofOfHumanity public proofOfHumanity;
 
     address payable public ubiBurner;
-    address payable public immutable v4len;
-    address payable public immutable nico;
-    address payable public immutable front;
+    address payable private immutable _v4len;
+    address payable private immutable _nico;
+    address payable private immutable _front;
 
     uint256 public totalRaised;
 
@@ -51,16 +51,16 @@ contract WeAreHuman is ERC721, IWeAreHuman {
     constructor(
         address _proofOfHumanity,
         address _ubiBurner,
-        address _v4len,
-        address _nico,
-        address _front
+        address v4len_,
+        address nico_,
+        address front_
     ) ERC721("We Are Human", "WAH") {
         proofOfHumanity = IProofOfHumanity(_proofOfHumanity);
 
         ubiBurner = payable(_ubiBurner);
-        v4len = payable(_v4len);
-        nico = payable(_nico);
-        front = payable(_front);
+        _v4len = payable(v4len_);
+        _nico = payable(nico_);
+        _front = payable(front_);
     }
 
     function isRegistered(address human) public view returns (bool) {
@@ -171,9 +171,9 @@ contract WeAreHuman is ERC721, IWeAreHuman {
 
         require(balance > 0, "No balance to withdraw");
 
-        v4len.transfer((balance * 75) / 1000); // 7.5 %
-        nico.transfer(balance / 10); // 10 %
-        front.transfer(balance / 10); // 10 %
+        _v4len.transfer((balance * 75) / 1000); // 7.5 %
+        _nico.transfer(balance / 10); // 10 %
+        _front.transfer(balance / 10); // 10 %
 
         ubiBurner.transfer(address(this).balance); // 72.5 %
     }

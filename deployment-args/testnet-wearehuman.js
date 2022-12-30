@@ -1,10 +1,11 @@
 require('dotenv').config()
 
 const env = process.env
+const addresses = require('../contracts-addresses.json')
 
 module.exports = [
-	'0x45C41D8A4F0dd93BEbF7661671a49d659343E466',
-	env.TESTNET_BURNER,
+	addresses.goerli.proof_of_humanity,
+	addresses.goerli.ubi_burner,
 	env.TESTNET_VALEN,
 	env.TESTNET_NICO,
 	env.TESTNET_FRONT

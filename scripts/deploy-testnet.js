@@ -20,7 +20,7 @@ async function main() {
 	const WeAreHuman = await ethers.getContractFactory('WeAreHuman')
 	const weAreHuman = await WeAreHuman.deploy(
 		proofOfHumanity.address,
-		env.TESTNET_BURNER,
+		addresses.goerli.ubi_burner,
 		env.TESTNET_VALEN,
 		env.TESTNET_NICO,
 		env.TESTNET_FRONT
