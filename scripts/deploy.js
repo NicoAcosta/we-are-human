@@ -2,6 +2,8 @@ const {BigNumber} = require('ethers')
 const hre = require('hardhat')
 require('dotenv').config()
 
+const env = process.env
+
 async function main() {
 	const [deployer] = await ethers.getSigners()
 	console.log('Deployer:', await deployer.getAddress())
@@ -9,11 +11,11 @@ async function main() {
 	const WeAreHuman = await ethers.getContractFactory('WeAreHuman')
 	const weAreHuman = await WeAreHuman.deploy()
 	await weAreHuman.deployed(
-		process.env.MAINNET_POH,
-		process.env.MAINNET_BURNER,
-		process.env.MAINNET_VALEN,
-		process.env.MAINNET_NICO,
-		process.env.MAINNET_FRONT
+		env.MAINNET_POH,
+		env.MAINNET_BURNER,
+		env.MAINNET_VALEN,
+		env.MAINNET_NICO,
+		env.MAINNET_FRONT
 	)
 
 	console.log('WeAreHuman address:', weAreHuman.address)
