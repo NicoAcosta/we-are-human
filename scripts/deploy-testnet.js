@@ -8,8 +8,8 @@ async function main() {
 
 	const DummyPoH = await ethers.getContractFactory('DummyPoH')
 	const proofOfHumanity = await DummyPoH.deploy([
-		process.env.TESTNET_NICO,
-		process.env.TESTNET_VALEN
+		process.env.TESTNET_HUMAN_1,
+		process.env.TESTNET_HUMAN_2
 	])
 	await proofOfHumanity.deployed()
 
